@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Text talkText;
     public GameObject scannedObject;
     public GameObject menuPanel;
+    public GameObject InventroyPanel;
     public GameObject Player;
     public bool isScan;
 
@@ -31,6 +32,21 @@ public class GameManager : MonoBehaviour
             }
             
         }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (InventroyPanel.activeSelf == true)
+            {
+                InventroyPanel.SetActive(false);
+            }
+            else
+            {
+                InventroyPanel.SetActive(true);
+            }
+
+        }
+
+
     }
 
     // Update is called once per frame
