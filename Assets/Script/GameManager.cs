@@ -5,12 +5,22 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject talkPanel;
-    public Text talkText;
-    public GameObject scannedObject;
     public GameObject menuPanel;
     public GameObject Player;
+
+    //대화
+    public GameObject talkPanel;
+    public Text talkText;
+
+    public GameObject scannedObject;
     public bool isScan;
+
+    //아이템
+    public GameObject itempanel;
+    public Text itemText;
+
+    public GameObject ScannedItem;
+    public bool isScanitem;
 
     private void Start()
     {
@@ -56,6 +66,34 @@ public class GameManager : MonoBehaviour
 
         }
 
+    }
+
+    public void openItemPanel(GameObject scanItem)
+    {
+        if (isScanitem == true)
+        {
+            isScanitem = false;
+            itempanel.SetActive(false);
+        }
+        else
+        {
+            isScanitem = true;
+
+            //player가 스캔한 오브젝트를 받음
+            ScannedItem = scanItem;
+
+            //판넬 활성화
+            itempanel.SetActive(true);
+
+
+
+            //public을 통해 선택한 text를 위의 오브젝트의 이름 값을 가져와서 출력
+            itemText.text = ScannedItem.name + "를 얻으려면 스페이스를 눌러주세요!";
+
+            Destroy(ScannedItem);
+
+
+        }
     }
 
     public void GameSave()

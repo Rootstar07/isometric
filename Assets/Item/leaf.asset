@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d34f13764b24a42a9e5ffdaebe554e, type: 3}
-  m_Name: New Item
+  m_Name: leaf
   m_EditorClassIdentifier: 
-  itemName: 
-  itemImage: {fileID: 0}
-  itemPrefab: {fileID: 0}
-  itemType: 0
+  itemName: "\uD30C\uD53C\uB8E8\uC2A4"
+  itemImage: {fileID: -3803466081661082397, guid: 20d6cce5c7ac33b4e97f0f98a09aa347,
+    type: 3}
+  itemPrefab: {fileID: 9156551319695204353, guid: 5cc119d7b6756df4796603128d296d8e,
+    type: 3}
+  itemType: 2
   weaponType: 
