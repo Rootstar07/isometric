@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject scannedObject;
     public GameObject menuPanel;
     public GameObject Player;
+    public Image PortraitImg;
     public bool isScan;
     public int talkIndex;
 
@@ -61,11 +62,14 @@ public class GameManager : MonoBehaviour
 
         if (isNpc)
         {
-            talkText.text = talkData;
+            talkText.text = talkData.Split(':')[0];
+            PortraitImg.sprite = talkmanager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
+            PortraitImg.color = new Color(1, 1, 1, 1);
         }
         else
         {
             talkText.text = talkData;
+            PortraitImg.color = new Color(1, 1, 1, 0);
         }
 
         isScan = true;
