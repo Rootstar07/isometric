@@ -32,10 +32,10 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         //매니저에서 대화 처리를 하고 있을때는 이동불가
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
-        //h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
-        //v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
+        //h = Input.GetAxisRaw("Horizontal");
+        //v = Input.GetAxisRaw("Vertical");
+        h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
 
         if (h != 0 || v != 0)
         {
