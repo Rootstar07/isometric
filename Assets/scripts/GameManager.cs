@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject Player;
     public bool isScan;
+    public int talkIndex;
+
+    public TalkManager talkmanager;
 
     private void Start()
     {
@@ -36,26 +39,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     public void Scan(GameObject scanObj)
     {
-        if (isScan == true)
+        scannedObject = scanObj; //player가 스캔한 오브젝트를 받음
+
+        ObjData objdata = scannedObject.GetComponent<ObjData>();
+        Talk(objdata.id, objdata.isNPC);
+
+        talkPanel.SetActive(isScan); //판넬 활성화
+
+    }
+
+    void Talk(int id, bool isNpc)
+    {
+        string talkData = talkmanager.GetTalk(id, talkIndex);
+
+        if (talkData == null)
         {
             isScan = false;
-            talkPanel.SetActive(false);
+            talkIndex = 0;
+            return;
+        }
+
+        if (isNpc)
+        {
+            talkText.text = talkData;
         }
         else
         {
-            isScan = true;
-
-            //player가 스캔한 오브젝트를 받음
-            scannedObject = scanObj;
-
-            //판넬 활성화
-            talkPanel.SetActive(true);
-
-            //public을 통해 선택한 text를 위의 오브젝트의 이름 값을 가져와서 출력
-            talkText.text = "이건 " + scanObj.name + "이다.";
-
+            talkText.text = talkData;
         }
 
+        isScan = true;
+        talkIndex++;
     }
 
     public void GameSave()
