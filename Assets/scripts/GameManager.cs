@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Image PortraitImg;
     public bool isScan;
     public int talkIndex;
+    public QuestManager questManager;
 
     public TalkManager talkmanager;
 
@@ -51,18 +52,25 @@ public class GameManager : MonoBehaviour
 
     void Talk(int id, bool isNpc)
     {
-        string talkData = talkmanager.GetTalk(id, talkIndex);
+        //대화 데이터 설정
+        int questTalkIndex = questManager.GetQuestTalkIndex(id);
+        string talkData = talkmanager.GetTalk(id + questTalkIndex, talkIndex);
 
+        //대화 종료
         if (talkData == null)
         {
             isScan = false;
             talkIndex = 0;
+            Debug.Log(questManager.CheckQuest(id)); //대화가 끝나면 퀘스트인덱스 증가
             return;
         }
 
+        //대화 계속
         if (isNpc)
         {
             talkText.text = talkData.Split(':')[0];
+
+            //초상화 보여주기
             PortraitImg.sprite = talkmanager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
             PortraitImg.color = new Color(1, 1, 1, 1);
         }
