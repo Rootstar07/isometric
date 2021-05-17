@@ -31,21 +31,39 @@ public class TalkManager : MonoBehaviour
         //퀘스트 대화
         //10번대 퀘스트 진행
         talkData.Add(10 + 2000, new string[] { "다행히 멀쩡한거 같네:0", "여기가 루도의 꿈속이구나:1", "생각이상으로 이상한걸 미호가 멀쩡한지 확인해줄래?:2" });
-        talkData.Add(11 + 1000, new string[] { "괜찮아?" });
-        talkData.Add(12 + 2000, new string[] { "다시 왔네:0" });
+        talkData.Add(11 + 1000, new string[] { "난 괜찮은데 저기 박스 좀 치워줄래?" });
 
-        talkData.Add(20 + 2000, new string[] { "무슨일이야?:0", "그래!:3" });
+        talkData.Add(20 + 50000, new string[] { "엄청나게 무거운걸...", "휴.. 성공!" });
+        talkData.Add(21 + 1000, new string[] { "다했어!" });
+        //talkData.Add(12 + 2000, new string[] { "다시 왔네:0" });
+
+        //talkData.Add(20 + 2000, new string[] { "무슨일이야?:0", "그래!:3", "계속 가보자:0" });
     }
 
     public string GetTalk(int id, int talkIndex)
     {
-        if (talkIndex == talkData[id].Length)
+        if (!talkData.ContainsKey(id))
         {
-            return null;
-        }else
-        {
-            return talkData[id][talkIndex];
+            if (!talkData.ContainsKey(id - id % 10))
+            {
+                return GetTalk(id - id % 100, talkIndex);
+            }
+
+            else
+            {
+                return GetTalk(id - id % 10, talkIndex);
+            }
         }
+
+
+            if (talkIndex == talkData[id].Length)
+            {
+                return null;
+            }
+            else
+            {
+                return talkData[id][talkIndex];
+            }
        
     }
 

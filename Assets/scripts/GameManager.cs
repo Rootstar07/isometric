@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GameLoad();
+        Debug.Log(questManager.CheckQuest());
     }
 
     void Update()
