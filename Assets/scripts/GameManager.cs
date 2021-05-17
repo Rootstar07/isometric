@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject talkPanel;
+    public Animator talkPanel;
     public Text talkText;
     public GameObject scannedObject;
     public GameObject menuPanel;
     public GameObject Player;
     public Image PortraitImg;
+    public Animator protraitAni;
     public bool isScan;
     public int talkIndex;
     public QuestManager questManager;
-
+    public Sprite prevProtrait;
     public TalkManager talkmanager;
 
     private void Start()
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         ObjData objdata = scannedObject.GetComponent<ObjData>();
         Talk(objdata.id, objdata.isNPC);
 
-        talkPanel.SetActive(isScan); //판넬 활성화
+        talkPanel.SetBool("isShow", isScan); //판넬 활성화
 
     }
 
@@ -74,6 +75,14 @@ public class GameManager : MonoBehaviour
             //초상화 보여주기
             PortraitImg.sprite = talkmanager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
             PortraitImg.color = new Color(1, 1, 1, 1);
+
+            //초상화가 바뀌면 애니메이션 실행
+            if (prevProtrait != PortraitImg.sprite)
+            {
+                protraitAni.SetTrigger("doEffect");
+                prevProtrait = PortraitImg.sprite;
+            }
+            
         }
         else
         {

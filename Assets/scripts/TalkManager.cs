@@ -30,7 +30,7 @@ public class TalkManager : MonoBehaviour
 
         //퀘스트 대화
         //10번대 퀘스트 진행
-        talkData.Add(10 + 2000, new string[] { "다행히 멀쩡한거 같네:0", "여기가 루도의 꿈속이구나:1", "생각이상으로 이상한걸 미호가 멀쩡한지 확인해줄래?:2" });
+        talkData.Add(10 + 2000, new string[] { "다행히 멀쩡한거 같네:1", "여기가 루도의 꿈속이구나:1", "생각이상으로 이상한걸 미호가 멀쩡한지 확인해줄래?:2" });
         talkData.Add(11 + 1000, new string[] { "난 괜찮은데 저기 박스 좀 치워줄래?" });
 
         talkData.Add(20 + 50000, new string[] { "엄청나게 무거운걸...", "휴.. 성공!" });
