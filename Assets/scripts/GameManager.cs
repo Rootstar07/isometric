@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DialogueEditor; //이거 쓸래
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject Player;
     public bool isScan;
+
+    public NPCConversation testConversation; //무슨 대화 출력할건지 변수
 
     private void Start()
     {
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
         if (isScan == true)
         {
             isScan = false;
-            talkPanel.SetActive(false);
+            //talkPanel.SetActive(false);
         }
         else
         {
@@ -49,10 +52,12 @@ public class GameManager : MonoBehaviour
             scannedObject = scanObj;
 
             //판넬 활성화
-            talkPanel.SetActive(true);
+            //talkPanel.SetActive(true);
 
             //public을 통해 선택한 text를 위의 오브젝트의 이름 값을 가져와서 출력
-            talkText.text = "이건 " + scanObj.name + "이다.";
+            //talkText.text = "이건 " + scanObj.name + "이다.";
+
+            ConversationManager.Instance.StartConversation(testConversation);
 
         }
 
