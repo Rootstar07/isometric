@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     public bool isScan;
 
+    public bool playercanmove;
+
+    public NPCConversation[] conversations;
+
     public NPCConversation testConversation; //무슨 대화 출력할건지 변수
 
     private void Start()
@@ -36,6 +40,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayerCanMove()
+    {
+        if (playercanmove == false)
+            playercanmove = true;
+        else
+            playercanmove = false;
+    }
+
     // Update is called once per frame
     public void Scan(GameObject scanObj)
     {
@@ -57,6 +69,7 @@ public class GameManager : MonoBehaviour
             //public을 통해 선택한 text를 위의 오브젝트의 이름 값을 가져와서 출력
             //talkText.text = "이건 " + scanObj.name + "이다.";
 
+            //TODO 스캔을 하면, 스캔한 친구의 대화가 나오도록!!
             ConversationManager.Instance.StartConversation(testConversation);
 
         }
