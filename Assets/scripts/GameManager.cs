@@ -18,6 +18,16 @@ public class GameManager : MonoBehaviour
     public Sprite prevProtrait;
     public TalkManager talkmanager;
 
+    public bool isFight;
+    public GameObject fightPlayer;
+    public GameObject nonFightObj;
+    public GameObject fightObj;
+
+    public SpriteRenderer spriteRender;
+    public Sprite moveSprite;
+    public Sprite attackSprtie;
+    public Animator moveAnimator;
+
     private void Start()
     {
         GameLoad();
@@ -29,18 +39,12 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuPanel.activeSelf == true)
-            {
                 menuPanel.SetActive(false);
-            }
             else
-            {
-                menuPanel.SetActive(true);
-            }
-            
+                menuPanel.SetActive(true);          
         }
     }
 
-    // Update is called once per frame
     public void Scan(GameObject scanObj)
     {
         scannedObject = scanObj; //player가 스캔한 오브젝트를 받음
@@ -93,6 +97,30 @@ public class GameManager : MonoBehaviour
         isScan = true;
         talkIndex++;
     }
+
+    public void IsFight()
+    {
+
+        if (isFight == false) //전투on
+        {
+            nonFightObj.SetActive(false);
+            fightObj.SetActive(true);
+            isFight = true;
+            spriteRender.sprite = attackSprtie;
+            moveAnimator.enabled = false;
+
+
+        }
+        else //전투 off
+        {
+            nonFightObj.SetActive(true);
+            fightObj.SetActive(false);
+            isFight = false;
+            spriteRender.sprite = moveSprite;
+            moveAnimator.enabled = true;
+        }
+    }
+
 
     public void GameSave()
     {
