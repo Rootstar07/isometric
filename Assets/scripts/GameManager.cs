@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
         //playerPrefs로 저장할 변수를 선택하고 새로운 변수명 지정
         PlayerPrefs.SetFloat("PlayerX", Player.transform.position.x);
         PlayerPrefs.SetFloat("PlayerY", Player.transform.position.y);
+        PlayerPrefs.SetInt("QuestId", questManager.questId);
+        PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
 
         //playerPrefs의 세이브 함수 실행
         PlayerPrefs.Save();
@@ -119,8 +121,14 @@ public class GameManager : MonoBehaviour
         float x = PlayerPrefs.GetFloat("PlayerX");
         float y = PlayerPrefs.GetFloat("PlayerY");
 
+        int questId = PlayerPrefs.GetInt("QuestId");
+        int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
+
         //데이터를 바탕으로 플레이어의 위치를 지정
         Player.transform.position = new Vector3(x, y, 0);
+        questManager.questId = questId;
+        questManager.questActionIndex = questActionIndex;
+        questManager.ControlObject();
 
         menuPanel.SetActive(false);
 
@@ -130,5 +138,22 @@ public class GameManager : MonoBehaviour
     public void GameExit()
     {
         Application.Quit();
+    }
+
+    public void resetsavefile()
+    {
+        //playerPrefs로 저장할 변수를 선택하고 새로운 변수명 지정
+        PlayerPrefs.SetFloat("PlayerX", 0);
+        PlayerPrefs.SetFloat("PlayerY", 0);
+        PlayerPrefs.SetInt("QuestId", 10);
+        PlayerPrefs.SetInt("QuestActionIndex", 0);
+
+        //playerPrefs의 세이브 함수 실행
+        PlayerPrefs.Save();
+        GameLoad();
+
+        menuPanel.SetActive(false);
+
+        Debug.Log("초기화 성공");
     }
 }

@@ -61,7 +61,7 @@ public class QuestManager : MonoBehaviour
         questActionIndex = 0;
     }
 
-    void ControlObject()
+    public void ControlObject()
     {
         switch (questId) //퀘스트 아이디에 따라
         {
@@ -70,6 +70,8 @@ public class QuestManager : MonoBehaviour
                     questobject[0].SetActive(true);
                 break;
             case 20:
+                if (questActionIndex == 0)
+                    questobject[0].SetActive(true); //20일때 저장을 하면 10때 생기는 오브젝트 정보가 들어오지 않으므로 한번 더 생성하자 또는 침대에서만 저장해도 흐름상 괜찮을듯
                 if (questActionIndex == 1)
                     questobject[0].SetActive(false);
                 break;
