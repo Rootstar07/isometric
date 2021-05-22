@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public int health;
+    public int maxHealth;
+    public Slider healthSlider;
+    float healthRate;
     public Animator talkPanel;
     public Text talkText;
     public GameObject scannedObject;
     public GameObject menuPanel;
+    public GameObject gameOverPanel;
+    public Animator gameOverAni;
     public GameObject Player;
     public Image PortraitImg;
     public Animator protraitAni;
@@ -19,9 +25,6 @@ public class GameManager : MonoBehaviour
     public TalkManager talkmanager;
 
     public bool isFight;
-    public GameObject fightPlayer;
-    public GameObject nonFightObj;
-    public GameObject fightObj;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
@@ -43,7 +46,22 @@ public class GameManager : MonoBehaviour
             else
                 menuPanel.SetActive(true);          
         }
+
+        if (health <= 0)
+        {
+            GameOver();
+        }
+
+        healthRate = (float)health / (float)maxHealth;
+        UpdateHPSlider();
+
     }
+
+    public void UpdateHPSlider()
+    {
+        healthSlider.value = Mathf.Lerp(healthSlider.value, healthRate, Time.deltaTime * 10);
+    }
+
 
     public void Scan(GameObject scanObj)
     {
@@ -98,7 +116,7 @@ public class GameManager : MonoBehaviour
         talkIndex++;
     }
 
-    public void IsFight()
+    public void IsFight(GameObject fightObj, GameObject nonFightObj)
     {
 
         if (isFight == false) //전투on
@@ -121,6 +139,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        //Destroy(Player.gameObject);
+        GameObject[] battleMaps = GameObject.FindGameObjectsWithTag("전투맵");
+        foreach(GameObject x in battleMaps)
+        {
+            x.SetActive(false);
+        }
+
+        gameOverPanel.SetActive(true);
+        gameOverAni.SetBool("isGameOver", true);
+        //Time.timeScale = 0;
+
+    }
 
     public void GameSave()
     {
@@ -129,6 +161,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerY", Player.transform.position.y);
         PlayerPrefs.SetInt("QuestId", questManager.questId);
         PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
+        PlayerPrefs.SetInt("HP", health);
 
         //playerPrefs의 세이브 함수 실행
         PlayerPrefs.Save();
@@ -151,14 +184,18 @@ public class GameManager : MonoBehaviour
 
         int questId = PlayerPrefs.GetInt("QuestId");
         int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
+        int _health = PlayerPrefs.GetInt("HP");
 
         //데이터를 바탕으로 플레이어의 위치를 지정
         Player.transform.position = new Vector3(x, y, 0);
         questManager.questId = questId;
         questManager.questActionIndex = questActionIndex;
         questManager.ControlObject();
+        health = _health;
 
         menuPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        gameOverAni.SetBool("isGameOver", false);
 
         Debug.Log("불러오기 완료");
     }
