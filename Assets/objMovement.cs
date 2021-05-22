@@ -6,7 +6,7 @@ public class objMovement : MonoBehaviour
 {
     public int 이동시간;
     public string 경로;
-    public int n초뒤에이동시작!;
+    public int n초뒤에이동시작;
     public float 이동주기;
     public EaseType EY;
 
