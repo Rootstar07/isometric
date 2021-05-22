@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public int health;
     public Animator talkPanel;
     public Text talkText;
     public GameObject scannedObject;
@@ -43,6 +44,12 @@ public class GameManager : MonoBehaviour
             else
                 menuPanel.SetActive(true);          
         }
+
+        if (health <= 0)
+        {
+            GameOver();
+        }
+
     }
 
 
@@ -124,7 +131,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Destroy(Player.gameObject);
+        //Destroy(Player.gameObject);
         GameObject[] battleMaps = GameObject.FindGameObjectsWithTag("전투맵");
         foreach(GameObject x in battleMaps)
         {
@@ -144,6 +151,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerY", Player.transform.position.y);
         PlayerPrefs.SetInt("QuestId", questManager.questId);
         PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
+        PlayerPrefs.SetInt("HP", health);
 
         //playerPrefs의 세이브 함수 실행
         PlayerPrefs.Save();
@@ -155,8 +163,6 @@ public class GameManager : MonoBehaviour
 
     public void GameLoad()
     {
-        //현재문제: 플레이어가 죽었다가 살아나면 player 데이터가 없어서 접근 불가
-
         if (!PlayerPrefs.HasKey("PlayerX"))
         {
             return;
@@ -168,15 +174,16 @@ public class GameManager : MonoBehaviour
 
         int questId = PlayerPrefs.GetInt("QuestId");
         int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
+        int _health = PlayerPrefs.GetInt("HP");
 
         //데이터를 바탕으로 플레이어의 위치를 지정
         Player.transform.position = new Vector3(x, y, 0);
         questManager.questId = questId;
         questManager.questActionIndex = questActionIndex;
         questManager.ControlObject();
+        health = _health;
 
         menuPanel.SetActive(false);
-
         gameOverPanel.SetActive(false);
         gameOverAni.SetBool("isGameOver", false);
 

@@ -9,7 +9,6 @@ public class PlayerAction : MonoBehaviour
     float h;
     public float speed;
     public GameManager manager;
-    public int health;
     Vector3 dirVec;
     GameObject ScanObject;
 
@@ -26,13 +25,7 @@ public class PlayerAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            manager.GameOver();
-        }
-
         Move();
-
     }
 
     void Move()
