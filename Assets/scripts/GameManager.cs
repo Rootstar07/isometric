@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using BayatGames.SaveGameFree;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameLoad();
+        Load();
         Debug.Log(questManager.CheckQuest());
     }
 
@@ -154,44 +155,27 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void GameSave()
+    public void Save()
     {
-        //playerPrefs로 저장할 변수를 선택하고 새로운 변수명 지정
-        PlayerPrefs.SetFloat("PlayerX", Player.transform.position.x);
-        PlayerPrefs.SetFloat("PlayerY", Player.transform.position.y);
-        PlayerPrefs.SetInt("QuestId", questManager.questId);
-        PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
-        PlayerPrefs.SetInt("HP", health);
+        SaveGame.Save<Vector2>("PlayerPosition", Player.transform.position);
+        SaveGame.Save<int>("QuestId", questManager.questId);
+        SaveGame.Save<int>("QuestActionIndex", questManager.questActionIndex);
+        SaveGame.Save<int>("HP", health);
 
-        //playerPrefs의 세이브 함수 실행
-        PlayerPrefs.Save();
 
         menuPanel.SetActive(false);
-
         Debug.Log("저장완료");
     }
 
-    public void GameLoad()
+    public void Load()
     {
-        if (!PlayerPrefs.HasKey("PlayerX"))
-        {
+        if(SaveGame.Load<Vector2>("PlayerPosition") == null)
             return;
-        }
 
-        //저장된 데이터를 불러와서 새로운 변수로 지정
-        float x = PlayerPrefs.GetFloat("PlayerX");
-        float y = PlayerPrefs.GetFloat("PlayerY");
-
-        int questId = PlayerPrefs.GetInt("QuestId");
-        int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
-        int _health = PlayerPrefs.GetInt("HP");
-
-        //데이터를 바탕으로 플레이어의 위치를 지정
-        Player.transform.position = new Vector3(x, y, 0);
-        questManager.questId = questId;
-        questManager.questActionIndex = questActionIndex;
-        questManager.ControlObject();
-        health = _health;
+        Player.transform.position = SaveGame.Load<Vector2>("PlayerPosition");
+        questManager.questId = SaveGame.Load<int>("QuestId");
+        questManager.questActionIndex = SaveGame.Load<int>("QuestActionIndex");
+        health = SaveGame.Load<int>("HP");
 
         menuPanel.SetActive(false);
         gameOverPanel.SetActive(false);
@@ -200,25 +184,22 @@ public class GameManager : MonoBehaviour
         Debug.Log("불러오기 완료");
     }
 
+    public void ResetData()
+    {
+        SaveGame.Save<Vector2>("PlayerPosition", new Vector2(0, 0));
+        SaveGame.Save<int>("QuestId", 10);
+        SaveGame.Save<int>("QuestActionIndex", 0);
+        SaveGame.Save<int>("HP", 10);
+
+        Load();
+
+        menuPanel.SetActive(false);
+        Debug.Log("리셋완료");
+    }
+
+
     public void GameExit()
     {
         Application.Quit();
-    }
-
-    public void resetsavefile()
-    {
-        //playerPrefs로 저장할 변수를 선택하고 새로운 변수명 지정
-        PlayerPrefs.SetFloat("PlayerX", 0);
-        PlayerPrefs.SetFloat("PlayerY", 0);
-        PlayerPrefs.SetInt("QuestId", 10);
-        PlayerPrefs.SetInt("QuestActionIndex", 0);
-
-        //playerPrefs의 세이브 함수 실행
-        PlayerPrefs.Save();
-        GameLoad();
-
-        menuPanel.SetActive(false);
-
-        Debug.Log("초기화 성공");
     }
 }
