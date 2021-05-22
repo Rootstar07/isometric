@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  maxHealth: 0
+  maxHealth: 10
   healthSlider: {fileID: 1228766964}
   talkPanel: {fileID: 1614409871}
   talkText: {fileID: 546443386}

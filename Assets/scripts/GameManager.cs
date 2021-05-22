@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public int health;
     public int maxHealth;
     public Slider healthSlider;
-    float healthRate;
     public Animator talkPanel;
     public Text talkText;
     public GameObject scannedObject;
@@ -52,14 +51,13 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
 
-        healthRate = (float)health / (float)maxHealth;
-        UpdateHPSlider();
+        UpdateHPSlider((float)health / (float)maxHealth);
 
     }
 
-    public void UpdateHPSlider()
+    public void UpdateHPSlider(float x)
     {
-        healthSlider.value = Mathf.Lerp(healthSlider.value, healthRate, Time.deltaTime * 10);
+        healthSlider.value = Mathf.Lerp(healthSlider.value, x, Time.deltaTime * 10);
     }
 
 
