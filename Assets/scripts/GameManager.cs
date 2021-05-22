@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int health;
+    public int maxHealth;
+    public Slider healthSlider;
+    float healthRate;
     public Animator talkPanel;
     public Text talkText;
     public GameObject scannedObject;
@@ -22,7 +25,6 @@ public class GameManager : MonoBehaviour
     public TalkManager talkmanager;
 
     public bool isFight;
-    public GameObject fightPlayer;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
@@ -50,6 +52,14 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
 
+        healthRate = (float)health / (float)maxHealth;
+        UpdateHPSlider();
+
+    }
+
+    public void UpdateHPSlider()
+    {
+        healthSlider.value = Mathf.Lerp(healthSlider.value, healthRate, Time.deltaTime * 10);
     }
 
 
