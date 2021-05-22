@@ -9,6 +9,7 @@ public class PlayerAction : MonoBehaviour
     float h;
     public float speed;
     public GameManager manager;
+    public int health;
     Vector3 dirVec;
     GameObject ScanObject;
 
@@ -21,15 +22,20 @@ public class PlayerAction : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
 
     // Update is called once per frame
     void Update()
+    {
+        if (health <= 0)
+        {
+            manager.GameOver();
+        }
+
+        Move();
+
+    }
+
+    void Move()
     {
         //매니저에서 대화 처리를 하고 있을때는 이동불가
         //h = Input.GetAxisRaw("Horizontal");
@@ -53,7 +59,8 @@ public class PlayerAction : MonoBehaviour
         {
             dirVec = Vector3.up;
             //print("0,1");
-        }else if (anim.GetFloat("vAxisRaw") == -1)
+        }
+        else if (anim.GetFloat("vAxisRaw") == -1)
         {
             dirVec = Vector3.down;
             //print("0,-1");
@@ -75,7 +82,6 @@ public class PlayerAction : MonoBehaviour
             //매니저의 액션 함수로 스캔한 오브젝트를 전달, 이후 매니저에서 UI로 텍스트 넘겨줌
             manager.Scan(ScanObject);
         }
-
     }
 
     private void FixedUpdate()

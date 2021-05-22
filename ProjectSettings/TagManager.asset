@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - "\uCD1D\uC54C\uACBD\uACC4"
+  - "\uD50C\uB808\uC774\uC5B4"
+  - "\uAE30\uBCF8\uB9F5"
+  - "\uC804\uD22C\uB9F5"
   layers:
   - Default
   - TransparentFX
@@ -15,7 +19,7 @@ TagManager:
   - 
   - ScanableObject
   - Player
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -41,9 +45,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: map
+  - name: NoLight
     uniqueID: 4116856077
     locked: 0
-  - name: playersorting
+  - name: 
     uniqueID: 4034620577
+    locked: 0
+  - name: 
+    uniqueID: 627373113
+    locked: 0
+  - name: 
+    uniqueID: 1312062347
     locked: 0

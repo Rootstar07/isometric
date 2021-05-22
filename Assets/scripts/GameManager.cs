@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public Text talkText;
     public GameObject scannedObject;
     public GameObject menuPanel;
+    public GameObject gameOverPanel;
+    public Animator gameOverAni;
     public GameObject Player;
     public Image PortraitImg;
     public Animator protraitAni;
@@ -20,8 +22,6 @@ public class GameManager : MonoBehaviour
 
     public bool isFight;
     public GameObject fightPlayer;
-    public GameObject nonFightObj;
-    public GameObject fightObj;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
                 menuPanel.SetActive(true);          
         }
     }
+
 
     public void Scan(GameObject scanObj)
     {
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
         talkIndex++;
     }
 
-    public void IsFight()
+    public void IsFight(GameObject fightObj, GameObject nonFightObj)
     {
 
         if (isFight == false) //전투on
@@ -121,6 +122,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        Destroy(Player.gameObject);
+        GameObject[] battleMaps = GameObject.FindGameObjectsWithTag("전투맵");
+        foreach(GameObject x in battleMaps)
+        {
+            x.SetActive(false);
+        }
+
+        gameOverPanel.SetActive(true);
+        gameOverAni.SetBool("isGameOver", true);
+        //Time.timeScale = 0;
+
+    }
 
     public void GameSave()
     {
@@ -140,6 +155,8 @@ public class GameManager : MonoBehaviour
 
     public void GameLoad()
     {
+        //현재문제: 플레이어가 죽었다가 살아나면 player 데이터가 없어서 접근 불가
+
         if (!PlayerPrefs.HasKey("PlayerX"))
         {
             return;
@@ -159,6 +176,9 @@ public class GameManager : MonoBehaviour
         questManager.ControlObject();
 
         menuPanel.SetActive(false);
+
+        gameOverPanel.SetActive(false);
+        gameOverAni.SetBool("isGameOver", false);
 
         Debug.Log("불러오기 완료");
     }
