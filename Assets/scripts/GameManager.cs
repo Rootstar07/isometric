@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public Sprite prevProtrait;
     public TalkManager talkmanager;
 
-    public bool isFight;
+    public int isFight;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
@@ -117,21 +117,23 @@ public class GameManager : MonoBehaviour
     public void IsFight(GameObject fightObj, GameObject nonFightObj)
     {
 
-        if (isFight == false) //전투on
+        if (isFight == 0) //전투on
         {
             nonFightObj.SetActive(false);
             fightObj.SetActive(true);
-            isFight = true;
+            isFight = 1;
+            //플레이어 변환
             spriteRender.sprite = attackSprtie;
             moveAnimator.enabled = false;
 
 
         }
-        else //전투 off
+        else if (isFight == 1) //전투 off
         {
             nonFightObj.SetActive(true);
             fightObj.SetActive(false);
-            isFight = false;
+            isFight = 0;
+            //플레이어 변환
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
         }
