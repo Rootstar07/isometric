@@ -25,8 +25,7 @@ public class GameManager : MonoBehaviour
     public TalkManager talkmanager;
     public StageManager stagemanager;
     public GameObject battleArea;
-    public Animator battleAreaAni;
-    public GameObject battleAreaClone;
+    
     public GameObject mainCamera;
 
     public SpriteRenderer spriteRender;
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     int stageNum;
     bool isFight;
+    GameObject battleAreaClone;
 
     private void Start()
     {
@@ -124,26 +124,23 @@ public class GameManager : MonoBehaviour
 
         if (y == true) //전투 시작
         {
-            stagemanager.basicStage.SetActive(false);
-            stagemanager.fightStage[x].SetActive(true);
+            stagemanager.basicStage.SetActive(false); //기존 영역 가리기
+            stagemanager.fightStage[x].SetActive(true); //해당 지역 몹 생성
             Fight(x);
-            //battleArea.SetActive(true);
 
-            battleAreaClone = Instantiate(battleArea, Player.transform.position, Player.transform.rotation);
-            mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = false;
+            battleAreaClone = Instantiate(battleArea, Player.transform.position, Player.transform.rotation); //전투영역 생성
 
-            spriteRender.sprite = attackSprtie;
-            moveAnimator.enabled = false;
+            mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = false; //카메라 고정
+
+            spriteRender.sprite = attackSprtie; //플레이어 스프라이트 변경
+            moveAnimator.enabled = false; //플레이어 애니메이터 비활성화
         }
         else //일상으로
         {
             stagemanager.basicStage.SetActive(true);
             stagemanager.fightStage[x].SetActive(false);
             mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = true;
-
-            //battleAreaAni.SetBool("IsBattle", true);
-
-            Destroy(battleAreaClone);
+            battleAreaClone.GetComponentInChildren<BattleAreaStart>().Destory();
 
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
@@ -177,7 +174,7 @@ public class GameManager : MonoBehaviour
         SaveGame.Save<int>("QuestActionIndex", questManager.questActionIndex);
         SaveGame.Save<int>("HP", health);
         SaveGame.Save<int>("StageNum", stageNum);
-        SaveGame.Save<bool>("isFight", isFight);
+        //SaveGame.Save<bool>("isFight", isFight);
 
         menuPanel.SetActive(false);
         Debug.Log("저장완료");
@@ -192,11 +189,13 @@ public class GameManager : MonoBehaviour
         questManager.questId = SaveGame.Load<int>("QuestId");
         questManager.questActionIndex = SaveGame.Load<int>("QuestActionIndex");
         health = SaveGame.Load<int>("HP");
-        ChangeMap(SaveGame.Load<int>("StageNum"), SaveGame.Load<bool>("isFight"));
+        //ChangeMap(SaveGame.Load<int>("StageNum"), SaveGame.Load<bool>("isFight"));
 
         menuPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         gameOverAni.SetBool("isGameOver", false);
+
+        mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = true;
 
         Debug.Log("불러오기 완료");
     }
