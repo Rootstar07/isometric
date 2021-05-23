@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject battleArea;
     
     public GameObject mainCamera;
+    public GameObject battleUI;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
@@ -124,6 +125,8 @@ public class GameManager : MonoBehaviour
 
         if (y == true) //전투 시작
         {
+
+            battleUI.SetActive(true);
             stagemanager.basicStage.SetActive(false); //기존 영역 가리기
             stagemanager.fightStage[x].SetActive(true); //해당 지역 몹 생성
             Fight(x);
@@ -137,6 +140,7 @@ public class GameManager : MonoBehaviour
         }
         else //일상으로
         {
+            battleUI.SetActive(false);
             stagemanager.basicStage.SetActive(true);
             stagemanager.fightStage[x].SetActive(false);
             mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = true;
