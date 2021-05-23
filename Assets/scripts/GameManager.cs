@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public int health;
     public int maxHealth;
+    public Text enemyHPText;
+    public Text enemyMaxHPText;
     public Slider healthSlider;
     public Animator talkPanel;
     public Text talkText;
@@ -125,10 +127,11 @@ public class GameManager : MonoBehaviour
 
         if (y == true) //전투 시작
         {
-
             battleUI.SetActive(true);
             stagemanager.basicStage.SetActive(false); //기존 영역 가리기
-            stagemanager.fightStage[x].SetActive(true); //해당 지역 몹 생성
+            stagemanager.fightStage[x].SetActive(true); //해당 지역 오브젝트 활성화
+            enemyHPText.text = stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().enemyHP;
+            enemyMaxHPText.text = stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().maxEnemyHp;
             Fight(x);
 
             battleAreaClone = Instantiate(battleArea, Player.transform.position, Player.transform.rotation); //전투영역 생성
