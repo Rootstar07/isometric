@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     public Sprite prevProtrait;
     public TalkManager talkmanager;
     public StageManager stagemanager;
+    public GameObject battleArea;
+    public Animator battleAreaAni;
+    public GameObject battleAreaClone;
+    public GameObject mainCamera;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
@@ -117,11 +121,16 @@ public class GameManager : MonoBehaviour
     {
         stageNum = x;
         isFight = y;
-        
+
         if (y == true) //전투 시작
         {
             stagemanager.basicStage.SetActive(false);
             stagemanager.fightStage[x].SetActive(true);
+            Fight(x);
+            //battleArea.SetActive(true);
+
+            battleAreaClone = Instantiate(battleArea, Player.transform.position, Player.transform.rotation);
+            mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = false;
 
             spriteRender.sprite = attackSprtie;
             moveAnimator.enabled = false;
@@ -130,10 +139,20 @@ public class GameManager : MonoBehaviour
         {
             stagemanager.basicStage.SetActive(true);
             stagemanager.fightStage[x].SetActive(false);
+            mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = true;
+
+            //battleAreaAni.SetBool("IsBattle", true);
+
+            Destroy(battleAreaClone);
 
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
         }
+    }
+
+    public void Fight(int x)
+    {
+        Debug.Log("스테이지: " + x);
     }
 
     public void GameOver()
