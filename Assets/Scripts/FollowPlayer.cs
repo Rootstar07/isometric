@@ -9,20 +9,10 @@ public class FollowPlayer : MonoBehaviour
 
     Vector3 cameraPosition;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
         if (canCameraMoving == true)
             CameraMoveing();
-        else
-            CameraStop();
-
     }
 
     public void CameraMoveing()
@@ -34,8 +24,12 @@ public class FollowPlayer : MonoBehaviour
         transform.position = cameraPosition;
     }
 
-    public void CameraStop()
+    public void CameraStop(GameObject x)
     {
-        transform.position = transform.position;
+        cameraPosition.x = x.transform.position.x;
+        cameraPosition.y = x.transform.position.y;
+        cameraPosition.z = -10;
+
+        transform.position = cameraPosition;
     }
 }

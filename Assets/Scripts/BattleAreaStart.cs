@@ -14,7 +14,7 @@ public class BattleAreaStart : MonoBehaviour
         Invoke("Collider", 1f);
     }
 
-    public void Collider()
+        public void Collider()
     {
         collider.SetActive(true);
     }

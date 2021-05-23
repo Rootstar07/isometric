@@ -13,7 +13,7 @@ public class battleStart : MonoBehaviour
     {
         if (collision.gameObject.tag == "플레이어")
         {
-            gameManager.ChangeMap(stageNum, isStart);
+            gameManager.ChangeMap(stageNum, isStart, gameObject);
         }
     }
 

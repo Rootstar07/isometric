@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         talkIndex++;
     }
 
-    public void ChangeMap(int x, bool y) //x는 전투 스테이지 번호, y는 inout 여부
+    public void ChangeMap(int x, bool y, GameObject z) //x는 전투 스테이지 번호, y는 inout 여부
     {
         stageNum = x;
         isFight = y;
@@ -130,13 +130,13 @@ public class GameManager : MonoBehaviour
             battleUI.SetActive(true);
             stagemanager.basicStage.SetActive(false); //기존 영역 가리기
             stagemanager.fightStage[x].SetActive(true); //해당 지역 오브젝트 활성화
-            enemyHPText.text = stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().enemyHP;
-            enemyMaxHPText.text = stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().maxEnemyHp;
+            WallHealth(stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().enemyHP, stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().maxEnemyHp);
             Fight(x);
 
-            battleAreaClone = Instantiate(battleArea, Player.transform.position, Player.transform.rotation); //전투영역 생성
+            battleAreaClone = Instantiate(battleArea, z.transform.position, z.transform.rotation); //전투영역 생성
 
             mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = false; //카메라 고정
+            mainCamera.GetComponentInChildren<FollowPlayer>().CameraStop(z);
 
             spriteRender.sprite = attackSprtie; //플레이어 스프라이트 변경
             moveAnimator.enabled = false; //플레이어 애니메이터 비활성화
@@ -152,6 +152,12 @@ public class GameManager : MonoBehaviour
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
         }
+    }
+
+    public void WallHealth(string cur, string max)
+    {
+            enemyHPText.text = cur;
+            enemyMaxHPText.text = max;
     }
 
     public void Fight(int x)
