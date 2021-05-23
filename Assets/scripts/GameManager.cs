@@ -23,13 +23,15 @@ public class GameManager : MonoBehaviour
     public QuestManager questManager;
     public Sprite prevProtrait;
     public TalkManager talkmanager;
-
-    public int isFight;
+    public StageManager stagemanager;
 
     public SpriteRenderer spriteRender;
     public Sprite moveSprite;
     public Sprite attackSprtie;
     public Animator moveAnimator;
+
+    int stageNum;
+    bool isFight;
 
     private void Start()
     {
@@ -46,14 +48,10 @@ public class GameManager : MonoBehaviour
             else
                 menuPanel.SetActive(true);          
         }
-
         if (health <= 0)
-        {
             GameOver();
-        }
 
         UpdateHPSlider((float)health / (float)maxHealth);
-
     }
 
     public void UpdateHPSlider(float x)
@@ -115,26 +113,24 @@ public class GameManager : MonoBehaviour
         talkIndex++;
     }
 
-    public void IsFight(GameObject fightObj, GameObject nonFightObj)
+    public void ChangeMap(int x, bool y) //x는 전투 스테이지 번호, y는 inout 여부
     {
-
-        if (isFight == 0) //전투on
+        stageNum = x;
+        isFight = y;
+        
+        if (y == true) //전투 시작
         {
-            nonFightObj.SetActive(false);
-            fightObj.SetActive(true);
-            isFight = 1;
-            //플레이어 변환
+            stagemanager.basicStage.SetActive(false);
+            stagemanager.fightStage[x].SetActive(true);
+
             spriteRender.sprite = attackSprtie;
             moveAnimator.enabled = false;
-
-
         }
-        else if (isFight == 1) //전투 off
+        else //일상으로
         {
-            nonFightObj.SetActive(true);
-            fightObj.SetActive(false);
-            isFight = 0;
-            //플레이어 변환
+            stagemanager.basicStage.SetActive(true);
+            stagemanager.fightStage[x].SetActive(false);
+
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
         }
@@ -143,11 +139,11 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //Destroy(Player.gameObject);
-        GameObject[] battleMaps = GameObject.FindGameObjectsWithTag("전투맵");
-        foreach(GameObject x in battleMaps)
-        {
-            x.SetActive(false);
-        }
+        //GameObject[] battleMaps = GameObject.FindGameObjectsWithTag("전투맵");
+        //foreach(GameObject x in battleMaps)
+        //{
+        //    x.SetActive(false);
+        //}
 
         gameOverPanel.SetActive(true);
         gameOverAni.SetBool("isGameOver", true);
@@ -161,7 +157,8 @@ public class GameManager : MonoBehaviour
         SaveGame.Save<int>("QuestId", questManager.questId);
         SaveGame.Save<int>("QuestActionIndex", questManager.questActionIndex);
         SaveGame.Save<int>("HP", health);
-
+        SaveGame.Save<int>("StageNum", stageNum);
+        SaveGame.Save<bool>("isFight", isFight);
 
         menuPanel.SetActive(false);
         Debug.Log("저장완료");
@@ -176,6 +173,7 @@ public class GameManager : MonoBehaviour
         questManager.questId = SaveGame.Load<int>("QuestId");
         questManager.questActionIndex = SaveGame.Load<int>("QuestActionIndex");
         health = SaveGame.Load<int>("HP");
+        ChangeMap(SaveGame.Load<int>("StageNum"), SaveGame.Load<bool>("isFight"));
 
         menuPanel.SetActive(false);
         gameOverPanel.SetActive(false);
