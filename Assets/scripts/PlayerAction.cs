@@ -21,11 +21,18 @@ public class PlayerAction : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         Move();
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("총알"))
+        {
+            manager.PlayerHitted();
+            Debug.Log("맞았습니다");
+        }
     }
 
     void Move()

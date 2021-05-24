@@ -5,20 +5,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    public GameManager gamemanager;
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "총알경계") //총알경계라는 태그에 닿으면 삭제
-        {
-            Destroy(gameObject);
-            gamemanager.WallHealthCounter();
 
-        }
-
-        if (collision.gameObject.tag == "플레이어")
+        if (collision.CompareTag("플레이어"))
         {
-            Debug.Log("맞았습니다");
             Destroy(gameObject);
         }
     }

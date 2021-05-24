@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
         healthSlider.value = Mathf.Lerp(healthSlider.value, x, Time.deltaTime * 10);
     }
 
+    
+    public void PlayerHitted()
+    {
+        health = health - 1;
+    }
 
     public void Scan(GameObject scanObj)
     {
@@ -155,7 +160,6 @@ public class GameManager : MonoBehaviour
 
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
-
         }
     }
 
@@ -163,7 +167,6 @@ public class GameManager : MonoBehaviour
     public void Fight(int x, bool y, GameObject z)
     {
         battleAreaClone = Instantiate(battleArea, z.transform.position, z.transform.rotation); //전투영역 생성
-        //z.SetActive(false); //해당 이니시에이터 비활성화
         Debug.Log("스테이지: " + x);
     }
 
@@ -187,17 +190,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        //Destroy(Player.gameObject);
-        //GameObject[] battleMaps = GameObject.FindGameObjectsWithTag("전투맵");
-        //foreach(GameObject x in battleMaps)
-        //{
-        //    x.SetActive(false);
-        //}
-
         gameOverPanel.SetActive(true);
         gameOverAni.SetBool("isGameOver", true);
         //Time.timeScale = 0;
-
     }
 
     public void Save()
@@ -206,8 +201,18 @@ public class GameManager : MonoBehaviour
         SaveGame.Save<int>("QuestId", questManager.questId);
         SaveGame.Save<int>("QuestActionIndex", questManager.questActionIndex);
         SaveGame.Save<int>("HP", health);
-        //SaveGame.Save<int>("StageNum", stageNum);
-        //SaveGame.Save<bool>("isFight", isFight);
+
+        //스테이지 매니저의 Bool 배열값을 문자열로 변환하여 저장
+        string strArr = "";
+        for (int i = 0; i < stagemanager.clearStage.Length; i++)
+        {
+            strArr = strArr + stagemanager.clearStage[i];
+            if (i < stagemanager.clearStage.Length - 1)
+            {
+                strArr = strArr + ",";
+            }
+        }
+        SaveGame.Save<string>("clearStageStringList", strArr);
 
         menuPanel.SetActive(false);
         Debug.Log("저장완료");
@@ -215,20 +220,48 @@ public class GameManager : MonoBehaviour
 
     public void Load()
     {
-        if(SaveGame.Load<Vector2>("PlayerPosition") == null)
+        //문자열을 Split을 이용해서 나눈뒤 Bool 배열로 변환
+        string[] clearStageStringListData = SaveGame.Load<string>("clearStageStringList").Split(',');
+        bool[] clearStageList = new bool[clearStageStringListData.Length];
+
+        for (int i = 0; i < clearStageList.Length; i++)
+        {
+            clearStageList[i] = System.Convert.ToBoolean(clearStageStringListData[i]); // 문자열 형태로 저장된 값을 정수형으로 변환후 저장
+        }
+
+        stagemanager.clearStage = clearStageList; //저장데이터와 스테이지 매니저 동기화
+
+        //Bool 배열의 값에 따라 이니시에이터의 생성여부 결정
+        for (int i = 0; i < stagemanager.initiatorList.Length; i++)
+        {
+            if (clearStageList[i] == false)
+                stagemanager.initiatorList[i].SetActive(true);
+            else
+                stagemanager.initiatorList[i].SetActive(false);
+        }
+
+        if (SaveGame.Load<Vector2>("PlayerPosition") == null)
             return;
 
         Player.transform.position = SaveGame.Load<Vector2>("PlayerPosition");
         questManager.questId = SaveGame.Load<int>("QuestId");
         questManager.questActionIndex = SaveGame.Load<int>("QuestActionIndex");
         health = SaveGame.Load<int>("HP");
-        //ChangeMap(SaveGame.Load<int>("StageNum"), SaveGame.Load<bool>("isFight"));
 
         menuPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         gameOverAni.SetBool("isGameOver", false);
-
         mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = true;
+
+        //전투 중 불러오기
+        if (battleAreaClone != null)
+        {
+            battleUI.SetActive(false);
+            stagemanager.basicStage.SetActive(true);
+            battleAreaClone.GetComponentInChildren<BattleAreaStart>().Destory();
+            spriteRender.sprite = moveSprite;
+            moveAnimator.enabled = true;
+        }
 
         Debug.Log("불러오기 완료");
     }
