@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     public Sprite attackSprtie;
     public Animator moveAnimator;
 
+    string maxWallHealth;
+    int wallHitCount;
+    GameObject initiator;
     int stageNum;
     bool isFight;
     GameObject battleAreaClone;
@@ -124,16 +127,17 @@ public class GameManager : MonoBehaviour
     {
         stageNum = x;
         isFight = y;
+        initiator = z;
 
         if (y == true) //전투 시작
         {
             battleUI.SetActive(true);
             stagemanager.basicStage.SetActive(false); //기존 영역 가리기
             stagemanager.fightStage[x].SetActive(true); //해당 지역 오브젝트 활성화
-            WallHealth(stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().enemyHP, stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().maxEnemyHp);
-            Fight(x);
-
-            battleAreaClone = Instantiate(battleArea, z.transform.position, z.transform.rotation); //전투영역 생성
+            maxWallHealth = stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().maxEnemyHp;
+            enemyMaxHPText.text = maxWallHealth;
+            WallHealth(stagemanager.fightStage[x].GetComponentInChildren<BattleInfo>().enemyHP);
+            Fight(x, y, z);
 
             mainCamera.GetComponentInChildren<FollowPlayer>().canCameraMoving = false; //카메라 고정
             mainCamera.GetComponentInChildren<FollowPlayer>().CameraStop(z);
@@ -151,18 +155,34 @@ public class GameManager : MonoBehaviour
 
             spriteRender.sprite = moveSprite;
             moveAnimator.enabled = true;
+
         }
     }
 
-    public void WallHealth(string cur, string max)
+
+    public void Fight(int x, bool y, GameObject z)
     {
-            enemyHPText.text = cur;
-            enemyMaxHPText.text = max;
+        battleAreaClone = Instantiate(battleArea, z.transform.position, z.transform.rotation); //전투영역 생성
+        //z.SetActive(false); //해당 이니시에이터 비활성화
+        Debug.Log("스테이지: " + x);
     }
 
-    public void Fight(int x)
+    public void WallHealth(string cur) //현재체력표시
     {
-        Debug.Log("스테이지: " + x);
+        int currentWallHp = int.Parse(maxWallHealth) - int.Parse(cur);
+        enemyHPText.text = currentWallHp.ToString();
+        if(currentWallHp < 0)
+        {
+            initiator.GetComponentInChildren<battleStart>().isStart = false;
+            initiator.SetActive(true);
+        }
+    }
+
+    public void WallHealthCounter() //총알인스턴스에서 데이터를 받아서 WallHealth에 전달
+    {
+        wallHitCount++;
+        Debug.Log(wallHitCount);
+        WallHealth(wallHitCount.ToString());
     }
 
     public void GameOver()
@@ -186,7 +206,7 @@ public class GameManager : MonoBehaviour
         SaveGame.Save<int>("QuestId", questManager.questId);
         SaveGame.Save<int>("QuestActionIndex", questManager.questActionIndex);
         SaveGame.Save<int>("HP", health);
-        SaveGame.Save<int>("StageNum", stageNum);
+        //SaveGame.Save<int>("StageNum", stageNum);
         //SaveGame.Save<bool>("isFight", isFight);
 
         menuPanel.SetActive(false);
@@ -225,7 +245,6 @@ public class GameManager : MonoBehaviour
         menuPanel.SetActive(false);
         Debug.Log("리셋완료");
     }
-
 
     public void GameExit()
     {
