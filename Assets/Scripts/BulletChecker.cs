@@ -8,7 +8,7 @@ public class BulletChecker : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("총알")) //총알경계라는 태그에 닿으면 삭제
+        if (collision.CompareTag("총알2"))
         {
             Debug.Log("총알 +");
 

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 212285277186549566}
   - component: {fileID: 58244454276033004}
   - component: {fileID: 114695658691506018}
+  - component: {fileID: 5513539819722164267}
   m_Layer: 0
   m_Name: BulletBubble
-  m_TagString: Untagged
+  m_TagString: "\uCD1D\uC54C"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,3 +149,15 @@ MonoBehaviour:
   colorShiftSpeed: 0
   randomStartColor: 0
   Opacity: 0.65
+--- !u!114 &5513539819722164267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403298644245382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988b2d0570467840b8695eb0e08edcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

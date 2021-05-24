@@ -28,7 +28,7 @@ public class PlayerAction : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("총알"))
+        if (collision.CompareTag("총알2"))
         {
             manager.PlayerHitted();
             Debug.Log("맞았습니다");

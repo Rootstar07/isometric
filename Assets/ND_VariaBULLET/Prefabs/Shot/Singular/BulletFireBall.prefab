@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 114969196014344948}
   m_Layer: 0
   m_Name: BulletFireBall
-  m_TagString: Untagged
+  m_TagString: "\uCD1D\uC54C"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

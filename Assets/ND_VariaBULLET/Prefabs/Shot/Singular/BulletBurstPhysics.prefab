@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 50000012301653072}
   - component: {fileID: 58000011778573744}
   - component: {fileID: 114000010666207500}
-  - component: {fileID: 4938254582391688915}
   m_Layer: 0
   m_Name: BulletBurstPhysics
-  m_TagString: "\uCD1D\uC54C"
+  m_TagString: "\uCD1D\uC54C2"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1000014082473252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 53f296c93e3db66428e02271a6594e37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a26ebb9732ede0347a271e17874ce2cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,15 +168,3 @@ MonoBehaviour:
   Opacity: 1
   BurstFrequency: 10
   InitialBurst: 0.008
---- !u!114 &4938254582391688915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000014082473252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5988b2d0570467840b8695eb0e08edcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

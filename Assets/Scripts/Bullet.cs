@@ -10,7 +10,8 @@ public class Bullet : MonoBehaviour
 
         if (collision.CompareTag("플레이어"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            Debug.Log("피격");
         }
     }
 }

@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
         }
         else //일상으로
         {
+            stagemanager.clearStage[x] = true;
             battleUI.SetActive(false);
             stagemanager.basicStage.SetActive(true);
             stagemanager.fightStage[x].SetActive(false);
