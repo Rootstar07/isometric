@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerDaily : MonoBehaviour
 {
-
     float v;
     float h;
     public float speed;
@@ -32,20 +31,14 @@ public class PlayerDaily : MonoBehaviour
 
     void Move()
     {
-        //매니저에서 대화 처리를 하고 있을때는 이동불가
-        if (isTalking.activeSelf == true)
-        {
-            progressManager.CheckProgess();
+        if (manager.stopMove == true)
             return;
-        }
            
-
-
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        //h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
-        //v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
+        //h = manager.stopMove ? 0 : Input.GetAxisRaw("Horizontal");
+        //v = manager.stopMove ? 0 : Input.GetAxisRaw("Vertical");
 
         if (h != 0 || v != 0)
         {
@@ -83,7 +76,6 @@ public class PlayerDaily : MonoBehaviour
         //스캔 활성화
         if (Input.GetButtonDown("Jump") && ScanObject != null)
         {
-            //매니저의 액션 함수로 스캔한 오브젝트를 전달, 이후 매니저에서 UI로 텍스트 넘겨줌
             manager.Scan(ScanObject);
         }
     }

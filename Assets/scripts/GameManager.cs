@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         ObjData objdata = scannedObject.GetComponent<ObjData>();
         Talk(objdata.id, objdata.isNPC);
 
-        talkPanel.SetBool("isShow", isScan); //판넬 활성화
+        //talkPanel.SetBool("isShow", isScan); //판넬 활성화
 
     }
 

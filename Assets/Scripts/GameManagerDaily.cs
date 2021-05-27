@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using BayatGames.SaveGameFree;
-using DialogueEditor;
+using VIDE_Data;
 
 public class GameManagerDaily : MonoBehaviour
 {
@@ -11,13 +11,16 @@ public class GameManagerDaily : MonoBehaviour
     public GameObject menuPanel;
     public GameObject Player;
     public bool isScan;
+    public GameObject nodePanel;
+    public bool stopMove = false;
+    public Template_UIManager template_UIManager;
+    public VIDE_Assign vide_Assign;
 
-    public NPCConversation conversation;
+    public int nowNode;
 
     private void Start()
     {
         Load();
-        ConversationManager.Instance.StartConversation(conversation);
     }
 
     void Update()
@@ -29,36 +32,19 @@ public class GameManagerDaily : MonoBehaviour
             else
                 menuPanel.SetActive(true);
         }
-
-        if (ConversationManager.Instance != null)
-             {
-             if (ConversationManager.Instance.IsConversationActive)
-                 {
-                 if (Input.GetKeyDown(KeyCode.UpArrow))
-                     ConversationManager.Instance.SelectPreviousOption();
-                
-                 else if (Input.GetKeyDown(KeyCode.DownArrow))
-                     ConversationManager.Instance.SelectNextOption();
-                
-                 else if (Input.GetKeyDown(KeyCode.Space))
-                     ConversationManager.Instance.PressSelectedOption();
-                 }
-             }
-
     }
 
     public void Scan(GameObject scanObj)
     {
+        stopMove = true;
         scannedObject = scanObj; //player가 스캔한 오브젝트를 받음
+        int nowNode = scannedObject.GetComponentInChildren<NodeData>().node;
 
-        ObjData objdata = scannedObject.GetComponent<ObjData>();
 
-        ConversationManager.Instance.StartConversation(scanObj.GetComponentInChildren<NPCConversation>());
-
-        //Talk(objdata.id, objdata.isNPC);
-
-        //talkPanel.SetBool("isShow", isScan); //판넬 활성화
-
+        template_UIManager.Interact(vide_Assign);
+        VD.SetNode(nowNode);
+        //nodePanel.SetActive(true);
+        //노드를 지정하면 uimanager에서 nextnode를 계속 돌림, 끝나면 거기서 nodepanel을 비활성화
     }
 
     public void Save()
