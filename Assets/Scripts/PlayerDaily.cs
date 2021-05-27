@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAction : MonoBehaviour
+public class PlayerDaily : MonoBehaviour
 {
 
     float v;
     float h;
     public float speed;
-    public GameManager manager;
+    public GameManagerDaily manager;
     Vector3 dirVec;
     GameObject ScanObject;
 
@@ -26,21 +26,13 @@ public class PlayerAction : MonoBehaviour
         Move();
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("총알2"))
-        {
-            manager.PlayerHitted();
-            Debug.Log("맞았습니다");
-        }
-    }
 
     void Move()
     {
         //매니저에서 대화 처리를 하고 있을때는 이동불가
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
-        //h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
+        //h = Input.GetAxisRaw("Horizontal");
+        //v = Input.GetAxisRaw("Vertical");
+        h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
         v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
 
         if (h != 0 || v != 0)

@@ -18,6 +18,7 @@ public class TalkManager : MonoBehaviour
 
     void GenerateData()
     {
+        //아무 퀘스트가 없을때 기본대사, npc라면 반드시 초상화 데이터가 있어야하며 각 표정에 대해 숫자로 표정을 넣는다.
         talkData.Add(1000, new string[] {"안녕", "이곳에 처음이구나" }); //1000번 id에 대사를 넣음
         talkData.Add(2000, new string[] { "절대로 이곳에서 잠들면 안돼:0", "명심해!:1" });
         talkData.Add(100, new string[] { "작은 탁자가 있다." });
@@ -35,8 +36,8 @@ public class TalkManager : MonoBehaviour
 
         talkData.Add(20 + 50000, new string[] { "엄청나게 무거운걸...", "휴.. 성공!" });
         talkData.Add(21 + 1000, new string[] { "다했어!" });
-        //talkData.Add(12 + 2000, new string[] { "다시 왔네:0" });
 
+        //talkData.Add(12 + 2000, new string[] { "다시 왔네:0" });
         //talkData.Add(20 + 2000, new string[] { "무슨일이야?:0", "그래!:3", "계속 가보자:0" });
     }
 
