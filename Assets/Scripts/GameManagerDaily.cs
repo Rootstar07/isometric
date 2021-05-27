@@ -43,6 +43,7 @@ public class GameManagerDaily : MonoBehaviour
         scannedObject = scanObj; //player가 스캔한 오브젝트를 받음
 
         ObjData objdata = scannedObject.GetComponent<ObjData>();
+
         Talk(objdata.id, objdata.isNPC);
 
         talkPanel.SetBool("isShow", isScan); //판넬 활성화
@@ -103,7 +104,6 @@ public class GameManagerDaily : MonoBehaviour
     public void Load()
     {
 
-
         if (SaveGame.Load<Vector2>("PlayerPosition") == null)
             return;
 
@@ -112,7 +112,6 @@ public class GameManagerDaily : MonoBehaviour
         questManager.questActionIndex = SaveGame.Load<int>("QuestActionIndex");
 
         menuPanel.SetActive(false);
-
 
         Debug.Log("불러오기 완료");
     }

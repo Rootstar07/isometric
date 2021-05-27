@@ -19,7 +19,8 @@ public class TalkManager : MonoBehaviour
     void GenerateData()
     {
         //아무 퀘스트가 없을때 기본대사, npc라면 반드시 초상화 데이터가 있어야하며 각 표정에 대해 숫자로 표정을 넣는다.
-        talkData.Add(1000, new string[] {"안녕", "이곳에 처음이구나" }); //1000번 id에 대사를 넣음
+
+        talkData.Add(1000, new string[] {"zzz..." }); //1000번 id에 대사를 넣음
         talkData.Add(2000, new string[] { "절대로 이곳에서 잠들면 안돼:0", "명심해!:1" });
         talkData.Add(100, new string[] { "작은 탁자가 있다." });
 
