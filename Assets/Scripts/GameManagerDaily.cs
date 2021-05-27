@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using BayatGames.SaveGameFree;
+using DialogueEditor;
 
 public class GameManagerDaily : MonoBehaviour
 {
@@ -19,11 +20,14 @@ public class GameManagerDaily : MonoBehaviour
     public QuestManager questManager;
     public Sprite prevProtrait;
     public TalkManager talkmanager;
+    public NPCConversation conversation;
+
 
     private void Start()
     {
         Load();
         Debug.Log(questManager.CheckQuest());
+        ConversationManager.Instance.StartConversation(conversation);
     }
 
     void Update()
@@ -35,6 +39,21 @@ public class GameManagerDaily : MonoBehaviour
             else
                 menuPanel.SetActive(true);
         }
+
+        if (ConversationManager.Instance != null)
+             {
+             if (ConversationManager.Instance.IsConversationActive)
+                 {
+                 if (Input.GetKeyDown(KeyCode.UpArrow))
+                     ConversationManager.Instance.SelectPreviousOption();
+                
+                 else if (Input.GetKeyDown(KeyCode.DownArrow))
+                     ConversationManager.Instance.SelectNextOption();
+                
+                 else if (Input.GetKeyDown(KeyCode.Space))
+                     ConversationManager.Instance.PressSelectedOption();
+                 }
+             }
 
     }
 
@@ -99,6 +118,10 @@ public class GameManagerDaily : MonoBehaviour
         SaveGame.Save<Vector2>("PlayerPosition", Player.transform.position);
         SaveGame.Save<int>("QuestId", questManager.questId);
         SaveGame.Save<int>("QuestActionIndex", questManager.questActionIndex);
+
+        menuPanel.SetActive(false);
+
+        Debug.Log("저장하기 완료");
     }
 
     public void Load()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerDaily : MonoBehaviour
 {
 
@@ -14,6 +15,7 @@ public class PlayerDaily : MonoBehaviour
 
     Rigidbody2D rigid;
     Animator anim;
+    public GameObject isTalking;
 
     private void Awake()
     {
@@ -30,10 +32,13 @@ public class PlayerDaily : MonoBehaviour
     void Move()
     {
         //매니저에서 대화 처리를 하고 있을때는 이동불가
-        //h = Input.GetAxisRaw("Horizontal");
-        //v = Input.GetAxisRaw("Vertical");
-        h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
-        v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
+        if (isTalking.activeSelf == true)
+            return;
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
+
+        //h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
+        //v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
 
         if (h != 0 || v != 0)
         {
