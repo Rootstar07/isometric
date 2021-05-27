@@ -10,6 +10,7 @@ public class PlayerDaily : MonoBehaviour
     float h;
     public float speed;
     public GameManagerDaily manager;
+    public ProgressManager progressManager;
     Vector3 dirVec;
     GameObject ScanObject;
 
@@ -33,7 +34,13 @@ public class PlayerDaily : MonoBehaviour
     {
         //매니저에서 대화 처리를 하고 있을때는 이동불가
         if (isTalking.activeSelf == true)
+        {
+            progressManager.CheckProgess();
             return;
+        }
+           
+
+
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
