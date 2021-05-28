@@ -10,6 +10,7 @@ TagManager:
   - "\uC804\uD22C\uB9F5"
   - "\uCD1D\uC54C"
   - "\uCD1D\uC54C2"
+  - CameraBoundary
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - ScanableObject
   - Player
   - Bullet
-  - 
+  - Teleporter
   - 
   - 
   - 

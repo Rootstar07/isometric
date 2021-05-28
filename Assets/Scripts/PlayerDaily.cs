@@ -12,6 +12,7 @@ public class PlayerDaily : MonoBehaviour
     public GameManagerDaily manager;
     Vector3 dirVec;
     GameObject ScanObject;
+    GameObject Teleporter;
     public GameObject[] flowCharList;
 
     Rigidbody2D rigid;
@@ -76,6 +77,11 @@ public class PlayerDaily : MonoBehaviour
             //매니저의 액션 함수로 스캔한 오브젝트를 전달, 이후 매니저에서 UI로 텍스트 넘겨줌
             manager.Scan(ScanObject);
         }
+
+        if (Input.GetButtonDown("Jump") && Teleporter != null)
+        {
+            manager.Tele(Teleporter);
+        }
     }
 
     private void FixedUpdate()
@@ -87,6 +93,7 @@ public class PlayerDaily : MonoBehaviour
 
         //스캔할 레이어 선택
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 0.7f, LayerMask.GetMask("ScanableObject"));
+        RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position, dirVec, 0.7f, LayerMask.GetMask("Teleporter"));
 
         //스캔해서 ScanObject에 스캔된 오브젝트를 저장
         if (rayHit.collider != null)
@@ -96,6 +103,15 @@ public class PlayerDaily : MonoBehaviour
         else
         {
             ScanObject = null;
+        }
+
+        if (rayHit2.collider != null)
+        {
+            Teleporter = rayHit2.collider.gameObject;
+        }
+        else
+        {
+            Teleporter = null;
         }
     }
 }

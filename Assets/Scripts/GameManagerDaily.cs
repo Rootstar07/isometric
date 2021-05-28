@@ -11,9 +11,9 @@ public class GameManagerDaily : MonoBehaviour
     public GameObject scannedObject;
     public GameObject menuPanel;
     public GameObject Player;
+    public GameObject camera;
     public bool isScan;
 
-    public NPCConversation conversation;
     public GameObject flowchartObject;
     public Flowchart flowchart;
     public Flowchart forcedflowchart;
@@ -42,6 +42,18 @@ public class GameManagerDaily : MonoBehaviour
         flowchartObject.SetActive(true);
 
         flowchart.SetIntegerVariable("ID", scanObj.GetComponentInChildren<FungusData>().ID);
+    }
+
+    public void Tele(GameObject teleport)
+    {
+        float camX = teleport.GetComponentInChildren<Teledata>().camPos.transform.position.x;
+        float camY = teleport.GetComponentInChildren<Teledata>().camPos.transform.position.y;
+
+        Player.transform.position = teleport.GetComponentInChildren<Teledata>().toWhere.transform.position;
+        camera.transform.position = new Vector3(camX, camY, -10);
+
+        camera.GetComponentInChildren<Camera>().orthographicSize = teleport.GetComponentInChildren<Teledata>().camSize;
+
     }
 
     public void Save()
