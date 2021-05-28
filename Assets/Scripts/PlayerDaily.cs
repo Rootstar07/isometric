@@ -35,7 +35,7 @@ public class PlayerDaily : MonoBehaviour
         //매니저에서 대화 처리를 하고 있을때는 이동불가
         if (isTalking.activeSelf == true)
         {
-            progressManager.CheckProgess();
+            //progressManager.CheckProgess();
             return;
         }
            
