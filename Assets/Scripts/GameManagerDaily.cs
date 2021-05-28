@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using BayatGames.SaveGameFree;
 using DialogueEditor;
+using Fungus;
 
 public class GameManagerDaily : MonoBehaviour
 {
@@ -13,11 +14,15 @@ public class GameManagerDaily : MonoBehaviour
     public bool isScan;
 
     public NPCConversation conversation;
+    public GameObject flowchartObject;
+    public Flowchart flowchart;
+    public Flowchart forcedflowchart;
+    public bool playerCanMove = true;
 
     private void Start()
     {
         Load();
-        ConversationManager.Instance.StartConversation(conversation);
+        //ConversationManager.Instance.StartConversation(conversation);
     }
 
     void Update()
@@ -30,40 +35,23 @@ public class GameManagerDaily : MonoBehaviour
                 menuPanel.SetActive(true);
         }
 
-        if (ConversationManager.Instance != null)
-             {
-             if (ConversationManager.Instance.IsConversationActive)
-                 {
-                 if (Input.GetKeyDown(KeyCode.UpArrow))
-                     ConversationManager.Instance.SelectPreviousOption();
-                
-                 else if (Input.GetKeyDown(KeyCode.DownArrow))
-                     ConversationManager.Instance.SelectNextOption();
-                
-                 else if (Input.GetKeyDown(KeyCode.Space))
-                     ConversationManager.Instance.PressSelectedOption();
-                 }
-             }
-
     }
 
     public void Scan(GameObject scanObj)
     {
+        flowchartObject.SetActive(true);
+
         scannedObject = scanObj; //player가 스캔한 오브젝트를 받음
 
         ObjData objdata = scannedObject.GetComponent<ObjData>();
 
-        ConversationManager.Instance.StartConversation(scanObj.GetComponentInChildren<NPCConversation>());
-
-        //Talk(objdata.id, objdata.isNPC);
-
-        //talkPanel.SetBool("isShow", isScan); //판넬 활성화
-
+        flowchart.SetIntegerVariable("ID", objdata.GetComponentInChildren<FungusData>().ID);
     }
 
     public void Save()
     {
         SaveGame.Save<Vector2>("PlayerPosition", Player.transform.position);
+        SaveGame.Save<int>("스토리진행번호", forcedflowchart.GetIntegerVariable("StoryNum"));
 
         menuPanel.SetActive(false);
 
@@ -76,6 +64,7 @@ public class GameManagerDaily : MonoBehaviour
             return;
 
         Player.transform.position = SaveGame.Load<Vector2>("PlayerPosition");
+        forcedflowchart.SetIntegerVariable("StoryNum", SaveGame.Load<int>("스토리진행번호")); //스토리번호 로드
 
         menuPanel.SetActive(false);
 
@@ -85,6 +74,8 @@ public class GameManagerDaily : MonoBehaviour
     public void ResetData()
     {
         SaveGame.Save<Vector2>("PlayerPosition", new Vector2(0, 0));
+        forcedflowchart.SetIntegerVariable("StoryNum", 0);
+        SaveGame.Save<int>("스토리진행번호", forcedflowchart.GetIntegerVariable("StoryNum"));
 
         Load();
 

@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
 
 public class EventManager : MonoBehaviour
 {
-    public GameObject[] gameobject;
+    public int nowNode;
+    public Flowchart flowchart;
 
-    public void Setactive(int x)
+    private void LateUpdate()
     {
-        gameobject[x].SetActive(true);
+        //어디서든 NowProgress값이 변하면 강제이벤트 한번 실행
+        if (flowchart.GetIntegerVariable("StoryNum") == 0)
+        {
+            Fungus.Flowchart.BroadcastFungusMessage("강제이벤트1");
+            flowchart.SetIntegerVariable("StoryNum", 1);
+        }
+
     }
 }

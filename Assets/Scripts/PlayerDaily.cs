@@ -10,13 +10,12 @@ public class PlayerDaily : MonoBehaviour
     float h;
     public float speed;
     public GameManagerDaily manager;
-    public ProgressManager progressManager;
     Vector3 dirVec;
     GameObject ScanObject;
+    public GameObject[] flowCharList;
 
     Rigidbody2D rigid;
     Animator anim;
-    public GameObject isTalking;
 
     private void Awake()
     {
@@ -32,20 +31,11 @@ public class PlayerDaily : MonoBehaviour
 
     void Move()
     {
-        //매니저에서 대화 처리를 하고 있을때는 이동불가
-        if (isTalking.activeSelf == true)
-        {
-            //progressManager.CheckProgess();
+        if (flowCharList[0].activeSelf == true)
             return;
-        }
-           
-
 
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
-
-        //h = manager.isScan ? 0 : Input.GetAxisRaw("Horizontal");
-        //v = manager.isScan ? 0 : Input.GetAxisRaw("Vertical");
 
         if (h != 0 || v != 0)
         {
