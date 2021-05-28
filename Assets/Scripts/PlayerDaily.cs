@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class PlayerDaily : MonoBehaviour
 {
+
     float v;
     float h;
     public float speed;
     public GameManagerDaily manager;
-    public ProgressManager progressManager;
     Vector3 dirVec;
     GameObject ScanObject;
+    public GameObject[] flowCharList;
 
     Rigidbody2D rigid;
     Animator anim;
-    public GameObject isTalking;
 
     private void Awake()
     {
@@ -31,14 +31,11 @@ public class PlayerDaily : MonoBehaviour
 
     void Move()
     {
-        if (manager.stopMove == true)
+        if (flowCharList[0].activeSelf == true)
             return;
-           
+
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
-
-        //h = manager.stopMove ? 0 : Input.GetAxisRaw("Horizontal");
-        //v = manager.stopMove ? 0 : Input.GetAxisRaw("Vertical");
 
         if (h != 0 || v != 0)
         {
@@ -76,6 +73,7 @@ public class PlayerDaily : MonoBehaviour
         //스캔 활성화
         if (Input.GetButtonDown("Jump") && ScanObject != null)
         {
+            //매니저의 액션 함수로 스캔한 오브젝트를 전달, 이후 매니저에서 UI로 텍스트 넘겨줌
             manager.Scan(ScanObject);
         }
     }
