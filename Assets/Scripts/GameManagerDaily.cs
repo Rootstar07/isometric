@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using BayatGames.SaveGameFree;
-using DialogueEditor;
 using Fungus;
 
 public class GameManagerDaily : MonoBehaviour
