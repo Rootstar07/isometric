@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 42adc562535ab2c4f85fbffc9b0b468e
+guid: 5a76a99058f4bba4b8941aa6a93656f0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1717361085133701336
-    second: room1_0
+      213: -2269502165888011009
+    second: "\uC804\uB4F1_0"
   - first:
-      213: 7653053444442257430
-    second: room1_1
+      213: 7325674215686380010
+    second: "\uC804\uB4F1_1"
   - first:
-      213: 5747289702176062780
-    second: room1_2
+      213: 2191757493010712293
+    second: "\uC804\uB4F1_2"
   - first:
-      213: 723049565117698446
-    second: room1_3
+      213: -1780441683756349923
+    second: "\uC804\uB4F1_3"
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -111,13 +111,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: room1_0
+      name: "\uC804\uB4F1_0"
       rect:
         serializedVersion: 2
         x: 4
-        y: 6
-        width: 257
-        height: 243
+        y: 8
+        width: 41
+        height: 489
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d04976deca45d710800000000000000
-      internalID: 1717361085133701336
+      spriteID: ff4f341fdcb1180e0800000000000000
+      internalID: -2269502165888011009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: room1_1
+      name: "\uC804\uB4F1_1"
       rect:
         serializedVersion: 2
-        x: 301
-        y: 32
-        width: 285
-        height: 201
+        x: 53
+        y: 8
+        width: 41
+        height: 489
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6187f036f8b153a60800000000000000
-      internalID: 7653053444442257430
+      spriteID: ae99936d2e50aa560800000000000000
+      internalID: 7325674215686380010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: room1_2
+      name: "\uC804\uB4F1_2"
       rect:
         serializedVersion: 2
-        x: 630
-        y: 32
-        width: 257
-        height: 139
+        x: 102
+        y: 8
+        width: 41
+        height: 489
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3df67f988972cf40800000000000000
-      internalID: 5747289702176062780
+      spriteID: 5e644b4d3dfaa6e10800000000000000
+      internalID: 2191757493010712293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: room1_3
+      name: "\uC804\uB4F1_3"
       rect:
         serializedVersion: 2
-        x: 899
-        y: 48
-        width: 285
-        height: 195
+        x: 151
+        y: 8
+        width: 41
+        height: 489
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8157d3afb9c80a00800000000000000
-      internalID: 723049565117698446
+      spriteID: d168768c8b99a47e0800000000000000
+      internalID: -1780441683756349923
       vertices: []
       indices: 
       edges: []

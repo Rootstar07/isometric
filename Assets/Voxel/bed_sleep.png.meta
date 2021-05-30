@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: 42adc562535ab2c4f85fbffc9b0b468e
+guid: c6247c6e240de554a9a34aeaa68f8f93
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1717361085133701336
-    second: room1_0
+      213: 427789408250526397
+    second: bed_sleep_0
   - first:
-      213: 7653053444442257430
-    second: room1_1
+      213: 2488901780725045635
+    second: bed_sleep_1
   - first:
-      213: 5747289702176062780
-    second: room1_2
+      213: 5950212793463909399
+    second: bed_sleep_2
   - first:
-      213: 723049565117698446
-    second: room1_3
+      213: 4347362026233559289
+    second: bed_sleep_3
+  - first:
+      213: -1181874454485225402
+    second: bed_sleep_4
+  - first:
+      213: 3045490343637908375
+    second: bed_sleep_5
+  - first:
+      213: -475585834168415880
+    second: bed_sleep_6
+  - first:
+      213: 5282573859060051497
+    second: bed_sleep_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -57,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -111,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: room1_0
+      name: bed_sleep_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 6
-        width: 257
-        height: 243
+        x: 0
+        y: 155
+        width: 50
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d04976deca45d710800000000000000
-      internalID: 1717361085133701336
+      spriteID: dba72754330dfe500800000000000000
+      internalID: 427789408250526397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: room1_1
+      name: bed_sleep_1
       rect:
         serializedVersion: 2
-        x: 301
-        y: 32
-        width: 285
-        height: 201
+        x: 50
+        y: 155
+        width: 50
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6187f036f8b153a60800000000000000
-      internalID: 7653053444442257430
+      spriteID: 38914f89bfa5a8220800000000000000
+      internalID: 2488901780725045635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: room1_2
+      name: bed_sleep_2
       rect:
         serializedVersion: 2
-        x: 630
-        y: 32
-        width: 257
-        height: 139
+        x: 100
+        y: 155
+        width: 50
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3df67f988972cf40800000000000000
-      internalID: 5747289702176062780
+      spriteID: 71ca6649207639250800000000000000
+      internalID: 5950212793463909399
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: room1_3
+      name: bed_sleep_3
       rect:
         serializedVersion: 2
-        x: 899
-        y: 48
-        width: 285
-        height: 195
+        x: 150
+        y: 155
+        width: 50
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,8 +200,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8157d3afb9c80a00800000000000000
-      internalID: 723049565117698446
+      spriteID: 9f87ca3cabee45c30800000000000000
+      internalID: 4347362026233559289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bed_sleep_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 110
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 640bc4b0273299fe0800000000000000
+      internalID: -1181874454485225402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bed_sleep_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 110
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79b7b63f451c34a20800000000000000
+      internalID: 3045490343637908375
       vertices: []
       indices: 
       edges: []

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
 
 
 public class PlayerDaily : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerDaily : MonoBehaviour
     GameObject ScanObject;
     GameObject Teleporter;
     public GameObject[] flowCharList;
+    public Flowchart forcedFlowChart;
 
     Rigidbody2D rigid;
     Animator anim;
@@ -33,6 +35,8 @@ public class PlayerDaily : MonoBehaviour
     void Move()
     {
         if (flowCharList[0].activeSelf == true)
+            return;
+        if (forcedFlowChart.GetBooleanVariable("PlayerCanMove") == false)
             return;
 
         h = Input.GetAxisRaw("Horizontal");

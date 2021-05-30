@@ -40,7 +40,9 @@ public class GameManagerDaily : MonoBehaviour
     {
         flowchartObject.SetActive(true);
 
-        flowchart.SetIntegerVariable("ID", scanObj.GetComponentInChildren<FungusData>().ID);
+        flowchart.SetFloatVariable("ID", scanObj.GetComponentInChildren<FungusData>().ID);
+
+
     }
 
     public void Tele(GameObject teleport)
@@ -58,6 +60,10 @@ public class GameManagerDaily : MonoBehaviour
     public void Save()
     {
         SaveGame.Save<Vector2>("PlayerPosition", Player.transform.position);
+
+        //대화관련 저장, 퀘스트int는 생길때마다 추가할것
+        SaveGame.Save<int>("침대 퀘스트 int", flowchart.GetIntegerVariable("침대퀘스트int"));
+        SaveGame.Save<bool>("플레이어이동가능여부", forcedflowchart.GetBooleanVariable("PlayerCanMove"));
         SaveGame.Save<int>("스토리진행번호", forcedflowchart.GetIntegerVariable("StoryNum"));
 
         menuPanel.SetActive(false);
@@ -72,6 +78,8 @@ public class GameManagerDaily : MonoBehaviour
 
         Player.transform.position = SaveGame.Load<Vector2>("PlayerPosition");
         forcedflowchart.SetIntegerVariable("StoryNum", SaveGame.Load<int>("스토리진행번호")); //스토리번호 로드
+        forcedflowchart.SetBooleanVariable("PlayerCanMove", SaveGame.Load<bool>("플레이어이동가능여부"));
+        flowchart.SetIntegerVariable("침대퀘스트int", SaveGame.Load<int>("침대 퀘스트 int"));
 
         menuPanel.SetActive(false);
 
@@ -81,10 +89,11 @@ public class GameManagerDaily : MonoBehaviour
     public void ResetData()
     {
         SaveGame.Save<Vector2>("PlayerPosition", new Vector2(0, 0));
-        forcedflowchart.SetIntegerVariable("StoryNum", 0);
-        SaveGame.Save<int>("스토리진행번호", forcedflowchart.GetIntegerVariable("StoryNum"));
 
         Load();
+        forcedflowchart.SetIntegerVariable("StoryNum", 0);
+        forcedflowchart.SetBooleanVariable("PlayerCanMove", false);
+        flowchart.SetIntegerVariable("침대퀘스트int", 0);
 
         menuPanel.SetActive(false);
         Debug.Log("리셋완료");
