@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour
 {
+    public string foodName;
     public float foodPrice;
 
-    public void SetMenu(float rate)
+    public void SetMenu(float rate, float money)
     {
-        if (rate * 6700 < foodPrice)
+        if (money < foodPrice)
         {
             gameObject.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            gameObject.GetComponent<Button>().interactable = true;
         }
     }
 
