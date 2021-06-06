@@ -2991,8 +2991,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -523, y: -254.93}
-  m_SizeDelta: {x: 690.5663, y: 367.9402}
+  m_AnchoredPosition: {x: -662.6, y: -386.4}
+  m_SizeDelta: {x: 411.26672, y: 105.069916}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391469485
 MonoBehaviour:
@@ -4912,7 +4912,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 142
     y: 41
-    width: 60
+    width: 74.74226
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -4937,11 +4937,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -48.7023, y: 163.20203}
+  scrollPos: {x: 2.5451035, y: 186.77936}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 387
-  zoom: 1
+  zoom: 0.97
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -4949,8 +4949,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 583746851}
-  selectedCommands: []
+  - {fileID: 583746856}
+  selectedCommands:
+  - {fileID: 583746868}
   variables:
   - {fileID: 583746870}
   description: 
@@ -5018,7 +5019,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 403
     y: 149
-    width: 60
+    width: 69.58763
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -5045,7 +5046,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 404
     y: 41
-    width: 60
+    width: 68.5567
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -5148,7 +5149,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 280
     y: 42
-    width: 60
+    width: 81.95876
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -11172,6 +11173,7 @@ MonoBehaviour:
   MenuNext: {fileID: 516185619}
   telephoneAnimator: {fileID: 1125195109}
   "\uB20C\uB9B0\uBC84\uD2BC": {fileID: 0}
+  telePhone: {fileID: 1125195107}
   "\uC774\uC790": {fileID: 114726925}
   "\uC774\uC790\uC728": 0.3
   "\uC138\uAE08": {fileID: 1812609206}

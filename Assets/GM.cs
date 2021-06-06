@@ -13,6 +13,7 @@ public class GM : MonoBehaviour
     public GameObject MenuNext;
     public Animator telephoneAnimator;
     public MenuButton 눌린버튼;
+    public GameObject telePhone;
 
     //정산
     public Text 이자;
@@ -44,6 +45,14 @@ public class GM : MonoBehaviour
         finalEarn.text = (rate * 6700).ToString();
 
         money = rate * 6700 + money;//돈에 번 돈 추가, 대화가 끝났을때에만 기능함
+
+        if (telePhone.GetComponent<Animator>().GetBool("isTouch") == false) //폰이 꺼져있으면
+        {
+            telePhone.GetComponent<Animator>().SetBool("isTouch", true); //폰 열어
+        }
+
+        telePhone.GetComponent<TelePhoneAnimationController>().ToggleBool("EndOfTheDay"); //정산화면 연다.
+
 
         //가능한 메뉴 표시
         foreach (var i in menubutton)
